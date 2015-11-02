@@ -114,12 +114,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Object doInBackground(Void... params) {
             try{
-                String url = "http://203.151.92.199:8888/place";
+                String url = "http://203.151.92.199:8888/";
                 Traverson traverson = new Traverson(new URI(url), MediaTypes.HAL_JSON);
                 ParameterizedTypeReference<Resource<Place>> resourceParameterizedTypeReference = new
                         ParameterizedTypeReference<Resource<Place>>() {};
                 // stuck at this
-
+                String name = traverson.follow("place").follow("$._embedded.place[0]._links.self.href").toObject("$.name");
+                return name;
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -131,12 +132,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Object obj) {
             //Something here
+            String str = obj.toString();
+            TextView placeName = (TextView) findViewById(R.id.placename_value);
+            placeName.setText(str);
         }
 
-        public void traverse() throws URISyntaxException {
-
-
-        }
     }
 
 }
