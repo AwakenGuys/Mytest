@@ -1,15 +1,29 @@
 package test.mine.mytest.model;
 
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.geo.Point;
+import org.springframework.hateoas.ResourceSupport;
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
+
+import java.io.UnsupportedEncodingException;
+
 public class Place {
-    private String id;
+    @Id private String id;
+
+
     private String name;
     private String category;
-    private float lat;
-    private float lng;
 
+    private Point coordinates;
+
+    public Place() {
+    }
+
+    public Place( String name, String category, Point coordinates) throws UnsupportedEncodingException {
+        this.name = name;
+        this.category = category;
+        this.coordinates = coordinates;
+    }
 
     public String getId() {
         return id;
@@ -19,35 +33,37 @@ public class Place {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Point getCoordinates() {
+        return coordinates;
     }
 
-    public void setName(String name) {
+    public void setCoordinates(Point coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public void setName(String name){
         this.name = name;
     }
 
-    public String getCategory() {
+    public void setCategory(String cat){
+        category=cat;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getCategory(){
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public float getLat() {
-        return lat;
-    }
-
-    public void setLat(float lat) {
-        this.lat = lat;
-    }
-
-    public float getLng() {
-        return lng;
-    }
-
-    public void setLng(float lng) {
-        this.lng = lng;
+    @Override
+    public String toString() {
+        return "Place{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", coordinates=" + coordinates +
+                '}';
     }
 }
