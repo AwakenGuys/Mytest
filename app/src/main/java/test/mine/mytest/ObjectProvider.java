@@ -1,17 +1,12 @@
 package test.mine.mytest;
 
-import android.os.AsyncTask;
-
-import org.springframework.data.geo.Point;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.client.Traverson;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import test.mine.mytest.model.Place;
 
@@ -29,12 +24,7 @@ public class ObjectProvider  {
         for(int i = 0;i<size;i++){
             Traverson.TraversalBuilder traversalBuilder = traverson
                     .follow("$._embedded.places[" + i + "]._links.self.href");
-            place = new Place();
-            place.setId((String)traversalBuilder.toObject("$.id"));
-            place.setName((String)traversalBuilder.toObject("$.name"));
-            place.setCategory((String)traversalBuilder.toObject("$.category"));
-            place.setCoordinates(new Point((Double) traversalBuilder.toObject("$.coordinates.x"),
-                    (Double) traversalBuilder.toObject("$.coordinates.y")));
+            place = traversalBuilder.toObject(Place.class);
             places.add(place);
         }
         return places;
@@ -49,13 +39,8 @@ public class ObjectProvider  {
             while(true){
                 Traverson.TraversalBuilder traversalBuilder = traverson
                         .follow("$._embedded.places[" + i + "]._links.self.href");
-                place = new Place();
-                place.setId((String) traversalBuilder.toObject("$.id"));
+                place = traversalBuilder.toObject(Place.class);
                 if(place.getId()==null) break;
-                place.setName((String) traversalBuilder.toObject("$.name"));
-                place.setCategory((String) traversalBuilder.toObject("$.category"));
-                place.setCoordinates(new Point((Double) traversalBuilder.toObject("$.coordinates.x"),
-                        (Double) traversalBuilder.toObject("$.coordinates.y")));
                 places.add(place);
                 i++;
             }
@@ -75,13 +60,8 @@ public class ObjectProvider  {
             while(true){
                 Traverson.TraversalBuilder traversalBuilder = traverson
                         .follow("$._embedded.places[" + i + "]._links.self.href");
-                place = new Place();
-                place.setId((String) traversalBuilder.toObject("$.id"));
+                place = traversalBuilder.toObject(Place.class);
                 if(place.getId()==null) break;
-                place.setName((String) traversalBuilder.toObject("$.name"));
-                place.setCategory((String) traversalBuilder.toObject("$.category"));
-                place.setCoordinates(new Point((Double) traversalBuilder.toObject("$.coordinates.x"),
-                        (Double) traversalBuilder.toObject("$.coordinates.y")));
                 places.add(place);
                 i++;
             }

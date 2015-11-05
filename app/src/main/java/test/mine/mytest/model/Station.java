@@ -1,21 +1,36 @@
 package test.mine.mytest.model;
 
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.geo.Point;
-
 
 public abstract class Station {
-    @Id private String id;
+    private String id;
     private String name;
-    private Point coordinates;
+    private float lat;
+    private float lng;
 
     public Station() {
     }
 
-    public Station(String name, Point coordinates) {
+    public Station(String name, float lat, float lng) {
         this.name = name;
-        this.coordinates = coordinates;
+        this.lat = lat;
+        this.lng = lng;
+    }
+
+    public float getLat() {
+        return lat;
+    }
+
+    public void setLat(float lat) {
+        this.lat = lat;
+    }
+
+    public float getLng() {
+        return lng;
+    }
+
+    public void setLng(float lng) {
+        this.lng = lng;
     }
 
     public String getId() {
@@ -34,19 +49,13 @@ public abstract class Station {
         this.name = name;
     }
 
-    public Point getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(Point coordinates) {
-        this.coordinates = coordinates;
-    }
-
     @Override
     public String toString() {
         return "Station{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
+                ", lat=" + lat +
+                ", lng=" + lng +
                 '}';
     }
 }

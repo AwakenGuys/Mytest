@@ -1,6 +1,5 @@
 package test.mine.mytest.model;
 
-import org.springframework.data.annotation.Id;
 
 import java.io.UnsupportedEncodingException;
 

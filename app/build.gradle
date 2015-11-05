@@ -45,6 +45,5 @@ dependencies {
     compile ('com.jayway.jsonpath:json-path:2.0.0') { dep -> transitive = false }
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
     compile ('net.minidev:json-smart:2.2') { dep -> transitive = false }
-    compile 'org.springframework.data:spring-data-commons:1.11.0.RELEASE'
 
 }

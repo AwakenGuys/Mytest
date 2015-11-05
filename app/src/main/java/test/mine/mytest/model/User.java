@@ -1,10 +1,9 @@
 package test.mine.mytest.model;
 
 import java.util.ArrayList;
-import org.springframework.data.annotation.Id;
 
 public class User {
-    @Id private String id;
+    private String id;
     private String fb_id;
     private String name;
     private boolean banned;

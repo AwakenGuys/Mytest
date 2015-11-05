@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.geo.Point;
+
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
@@ -30,6 +30,7 @@ import org.springframework.hateoas.hal.HalLinkDiscoverer;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected Object doInBackground(Void... params) {
             try{
-                String url = "http://203.151.92.199:8888/";
+                String url = "http://203.151.92.199:8888/places?size=100";
                 Traverson traverson = new Traverson(new URI(url), MediaTypes.HAL_JSON);
                 //Map<String, Object> link_params = new HashMap<String, Object>();
                 //int size = traverson.follow("places").toObject("$.page.totalElements");
@@ -137,12 +138,13 @@ public class MainActivity extends AppCompatActivity {
                 //Resource<Place> placeResource = traverson.follow("places", "$._embedded.places[0]._links.self.href").toObject(resourceParameterizedTypeReference);
                 //Place place = placeResource.getContent();
                 //String name = stations[0].getName();
-                List<Place> places = new ArrayList<Place>();
-                for(int i = 0;i<63;i++){
-                    Place place = traverson.follow("places", "$._embedded.places[0]._links.self.href").toObject(Place.class);
-                    places.add(place);
-                }
-                Place place = places.get(0);
+                Place[] places = new Place[63];
+                //for(int i = 0;i<63;i++){
+                places = traverson.follow("$._embedded[$all]")
+                        .toObject(Place[].class);
+                //places[i] = place;
+                //}
+                Place place = places[0];
                 return place.getName();
                 //return size+"";
             }

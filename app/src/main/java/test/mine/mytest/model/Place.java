@@ -1,28 +1,22 @@
 package test.mine.mytest.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.geo.Point;
-import org.springframework.hateoas.ResourceSupport;
-
-
-import java.io.UnsupportedEncodingException;
-
 public class Place {
-    @Id private String id;
+    private String id;
 
 
     private String name;
     private String category;
-
-    private Point coordinates;
+    private float lat;
+    private float lng;
 
     public Place() {
     }
 
-    public Place( String name, String category, Point coordinates) throws UnsupportedEncodingException {
+    public Place(String name, String category, float lat, float lng) {
         this.name = name;
         this.category = category;
-        this.coordinates = coordinates;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public String getId() {
@@ -33,12 +27,20 @@ public class Place {
         this.id = id;
     }
 
-    public Point getCoordinates() {
-        return coordinates;
+    public float getLat() {
+        return lat;
     }
 
-    public void setCoordinates(Point coordinates) {
-        this.coordinates = coordinates;
+    public void setLat(float lat) {
+        this.lat = lat;
+    }
+
+    public float getLng() {
+        return lng;
+    }
+
+    public void setLng(float lng) {
+        this.lng = lng;
     }
 
     public void setName(String name){
@@ -63,7 +65,6 @@ public class Place {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
-                ", coordinates=" + coordinates +
                 '}';
     }
 }

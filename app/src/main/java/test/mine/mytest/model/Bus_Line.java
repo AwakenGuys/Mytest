@@ -1,12 +1,7 @@
 package test.mine.mytest.model;
 
-import org.springframework.data.annotation.Id;
 
-/**
- * Created by Xync on 05-Nov-15.
- */
 public class Bus_Line {
-    @Id
     private String id;
     private String line;
     private String route;
